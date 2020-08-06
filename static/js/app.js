@@ -19,7 +19,7 @@ var myMap = L.map("map", {
   }).addTo(myMap);
   
   // Use this link to get the geojson data.
-  var link = "assets/data/nyc.geojson";
+  var link = "static/data/nyc.geojson";
   
   // Grabbing our GeoJSON data..
   d3.json(link, function(data) {
