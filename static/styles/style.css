@@ -29,3 +29,10 @@ div.container.second {
     background-image: url('https://i.imgur.com/VWYl1EC.jpg');
     background-size: cover;
 }
+
+img.scroll {
+    position:absolute;
+    bottom:0;
+    right:0;
+    z-index: 1;
+}
