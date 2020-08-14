@@ -6,9 +6,9 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-mongo = PyMongo(app, uri="mongodb://localhost:27017/covid-db")
+mongo = PyMongo(app, uri="mongodb://localhost:27017/covid_db")
 
-@app_after_request
+@app.after_request
 def after_request(response):
     header = response.headers
     header["Access-control-allow-origin"] = '*'
@@ -25,8 +25,8 @@ def index():
 @app.route("/api")
 def api():
 
-    covid-data = mongo.db.collection.find({}, {'_id'= False})
-    cases = [case for case in covid-data]
+    covid_data = mongo.db.collection.find({}, {'_id': False})
+    cases = [case for case in covid_data]
     data = {
 
     "cases": cases
