@@ -4,9 +4,11 @@ from flask_pymongo import PyMongo
 
 # Create an instance of Flask
 app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb://localhost:27017/classdb/students"
 
 # Use PyMongo to establish Mongo connection
-mongo = PyMongo(app, uri="mongodb://localhost:27017/covid_db")
+# mongo = PyMongo(app, uri="mongodb://localhost:27017")
+mongo=PyMongo(app)
 
 @app.after_request
 def after_request(response):
@@ -24,15 +26,14 @@ def index():
 # Route that will trigger the scrape function
 @app.route("/api")
 def api():
+    # data1 = mongo["covid_db"].covid_data.find({}, {'_id': False})
+    # cases = [case for case in data1]
+    # data = {
 
-    covid_data = mongo.db.collection.find({}, {'_id': False})
-    cases = [case for case in covid_data]
-    data = {
-
-    "cases": cases
-    }
-
-    return jsonify(data)
+    # "cases": cases
+    # }
+    mongo.find()
+    return jsonify("x")
 
 
 if __name__ == "__main__":
