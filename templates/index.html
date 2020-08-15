@@ -28,7 +28,10 @@
     <div id="dashboard" class="container">
       <img src="{{ url_for('static',filename='images/confirmDeath.png') }}" alt="">
       <div id="my_dataviz"></div>
+      <div id="plot"></div>
     </div>
+
+
 
 
     <!-- Leaflet JS -->
@@ -42,6 +45,8 @@
     <!-- JS  -->
     <script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='js/densityGraph.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/plot.js') }}"></script>
+
 
     <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
   </body>

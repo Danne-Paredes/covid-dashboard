@@ -24,7 +24,19 @@ def index():
 @app.route("/api")
 def api():
     #coll = client.covid_db.covid_data.find()
-    coll= client["covid_db"].covid_data.find({ "Date":  {"$regex":"3/\d*/2020"}}, {'_id': False})
+    # marchcoll= client["covid_db"].covid_data.find({ "Date":  {"$regex":"3/\d*/2020"}}, {'_id': False})
+    # aprilcoll= client["covid_db"].covid_data.find({ "Date":  {"$regex":"4/\d*/2020"}}, {'_id': False})
+    # maycoll= client["covid_db"].covid_data.find({ "Date":  {"$regex":"5/\d*/2020"}}, {'_id': False})
+    # junecoll= client["covid_db"].covid_data.find({ "Date":  {"$regex":"6/\d*/2020"}}, {'_id': False})
+    # julycoll= client["covid_db"].covid_data.find({ "Date":  {"$regex":"7/\d*/2020"}}, {'_id': False})
+    coll= client["covid_db"].covid_data.find({ "Country":  {"US"}}, {'_id': False})
+    # Chinacoll = client["covid_db"].covid_data.find({ "Country":  {"China"}}, {'_id': False})
+    # Canadacoll = client["covid_db"].covid_data.find({ "Country":  {"Canada"}}, {'_id': False})
+    # Mexicocoll = client["covid_db"].covid_data.find({ "Country":  {"Mexico"}}, {'_id': False})
+
+
+
+            
     cases = [case for case in coll]
     data = {
 
