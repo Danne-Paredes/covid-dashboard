@@ -26,14 +26,20 @@ def index():
 # Route that will trigger the scrape function
 @app.route("/api")
 def api():
-    # data1 = mongo["covid_db"].covid_data.find({}, {'_id': False})
-    # cases = [case for case in data1]
-    # data = {
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    data1= client["covid_db"].covid.find({ "Country":  "US"}, {'_id': False})
 
-    # "cases": cases
-    # }
-    mongo.find()
-    return jsonify("x")
+    cases = [case for case in data1]
+    data = {
+
+    "cases": cases
+    }
+
+    return jsonify(data)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 if __name__ == "__main__":

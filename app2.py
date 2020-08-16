@@ -24,7 +24,7 @@ def index():
 @app.route("/api")
 def api():
 
-    coll= client["covid_db"].test.find({}, {'_id': False})
+    coll= client["covid_db"].covid.find({ "Country":  "US"}, {'_id': False})
 
 
 
