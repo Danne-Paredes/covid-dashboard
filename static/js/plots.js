@@ -17,17 +17,20 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
   
 // get the data
-d3.json("localhost:5000/api").then(function (data) {
-    console.log(data)
-    var USdata = data.filter(function (d) { return d.Country === "US" });
+d3.json("api").then(function (data) {
+
+    USdata = data
+    // var USdata = data.filter(function (d) { return d.Country === "US" });
     console.log(USdata)
-    var UScases = USdata.map(USdata => USdata.Confirmed);
-    var USrecovered = USdata.map(USdata => USdata.Recovered);
-    var USdeaths = USdata.map(USdata => USdata.Deaths);
-    var USdates = USdata.map(USdata => USdata.Date);
-    console.log(USdata)
+    var UScases = USdata.cases.map(USdata => USdata.Confirmed);
+    var USrecovered = USdata.cases.map(USdata => USdata.Recovered);
+    var USdeaths = USdata.cases.map(USdata => USdata.Deaths);
+    var USdates = USdata.cases.map(USdata => USdata.Date);
+
+   
     init(USdates, UScases);
 });
+
 // Initializes the page with a default plot 
 function init(xaxis, yaxis) {
     data = [{
@@ -35,7 +38,7 @@ function init(xaxis, yaxis) {
         y: yaxis
     }];
 
-    Plotly.newPlot("dropdown", data)
+    Plotly.newPlot("plot", data)
 };
 // Call updatePlotly() when a change takes place to the DOM
 d3.selectAll("#selDataset").on("change", updatePlotly);
@@ -46,6 +49,7 @@ function updatePlotly() {
     var dropdownMenu = d3.select("#selDataset");
     // Assign the value of the dropdown menu option to a variable
     var dataset = dropdownMenu.property("value");
+    console.log(USdeaths)
 
     // Initialize x and y arrays
     var x = [];

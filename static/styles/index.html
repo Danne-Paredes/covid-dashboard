@@ -12,28 +12,24 @@
     <!-- d3 JavaScript -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
 
   </head>
   <body>
 
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+    <!-- map div (full page on load) -->
+    <div class="container">
+      <div id="map"></div>
+      <img class="scroll" src="{{ url_for('static',filename='images/down.svg') }}" alt="">
+    </div>
 
-<body>
-
-    <div id="plot"></div>
-  
-    <select id="selDataset">
-      <option value="dataset1">Cases</option>
-      <option value="dataset2">Deaths</option>
-      <option value="dataset3">Recoveries</option>
-    </select>
-
+    <!-- Dashboard (must scroll down to see) -->
+    <div id="dashboard" class="container">
+      <img src="{{ url_for('static',filename='images/confirmDeath.png') }}" alt="">
+      <div id="my_dataviz"></div>
+      <div id="plot"></div>
+    </div>
 
 
 
@@ -47,9 +43,9 @@
     <script type="text/javascript" src="{{ url_for('static',filename='js/config.js') }}"></script>
 
     <!-- JS  -->
-    <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script> -->
+    <script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script>
     <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/densityGraph.js') }}"></script> -->
-    <script type="text/javascript" src="{{ url_for('static',filename='js/plots.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/plots.js') }}"></script> -->
     <script type="text/javascript" src="{{ url_for('static',filename='js/choropleth.js') }}"></script>
 
 
