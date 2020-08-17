@@ -74,6 +74,47 @@ def aprilapi():
 
     return jsonify(aprildata)
 
+    
+@app.route("/api/May")
+def Mayapi():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    Maycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"5/\d*/2020"}}, {'_id': False})
+
+    Maycases = [case for case in Maycoll]
+    Maydata = {
+
+    "cases": Maycases
+    }
+
+    return jsonify(Maydata)
+
+@app.route("/api/June")
+def Juneapi():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    Junecoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"6/\d*/2020"}}, {'_id': False})
+
+    Junecases = [case for case in Junecoll]
+    Junedata = {
+
+    "cases": Junecases
+    }
+
+    return jsonify(Junedata)
+
+@app.route("/api/July")
+def Julyapi():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    Julycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"7/\d*/2020"}}, {'_id': False})
+
+    Julycases = [case for case in Julycoll]
+    Julydata = {
+
+    "cases": Julycases
+    }
+
+    return jsonify(Julydata)
+
+
 
 
 
