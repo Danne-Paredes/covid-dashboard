@@ -29,7 +29,7 @@ def after_request(response):
 @app.route("/")
 def index():
     # mars = mongo.db.mars.find_one()
-    return render_template("index.html")
+    return render_template("index2.html")
 
 
 # Route that will trigger the scrape function
@@ -112,10 +112,69 @@ def julyapi():
 
     return jsonify(julydata)
 
-@app.route("/api/heat")
-def Heatapi():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    Heatcoll= client["covid_db"].test2.find({}, {'_id': False})
+@app.route("/api/all-heat")
+def heatAPI():
+    Heatcoll= client["covid_db"].allHeat.find({}, {'_id': False})
+
+    Heatcases = [case for case in Heatcoll]
+    Heatdata = {
+
+    "cases": Heatcases
+    }
+
+    return jsonify(Heatdata)
+
+@app.route("/api/march-heat")
+def heatMarchAPI():
+    HeatMarcoll= client["covid_db"].marchHeat.find({}, {'_id': False})
+
+    HeatMarcases = [case for case in HeatMarcoll]
+    HeatMardata = {
+
+    "cases": HeatMarcases
+    }
+
+    return jsonify(HeatMardata)
+
+@app.route("/api/april-heat")
+def heatAprilAPI():
+    Heatcoll= client["covid_db"].aprilHeat.find({}, {'_id': False})
+
+    Heatcases = [case for case in Heatcoll]
+    Heatdata = {
+
+    "cases": Heatcases
+    }
+
+    return jsonify(Heatdata)
+
+@app.route("/api/may-heat")
+def heatMayAPI():
+    Heatcoll= client["covid_db"].mayHeat.find({}, {'_id': False})
+
+    Heatcases = [case for case in Heatcoll]
+    Heatdata = {
+
+    "cases": Heatcases
+    }
+
+    return jsonify(Heatdata)
+
+@app.route("/api/june-heat")
+def heatJuneAPI():
+    Heatcoll= client["covid_db"].juneHeat.find({}, {'_id': False})
+
+    Heatcases = [case for case in Heatcoll]
+    Heatdata = {
+
+    "cases": Heatcases
+    }
+
+    return jsonify(Heatdata)
+
+@app.route("/api/july-heat")
+def heatJulyAPI():
+    Heatcoll= client["covid_db"].julyHeat.find({}, {'_id': False})
 
     Heatcases = [case for case in Heatcoll]
     Heatdata = {

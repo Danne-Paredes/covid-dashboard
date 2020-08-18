@@ -11,9 +11,10 @@ db = myclient["covid_db"]
 
 # Created or Switched to collection 
 # names: GeeksForGeeks 
-Collection = db["test2"] 
+ 
 for filename in os.listdir('static/data'):
-	print(filename)
+	name = os.path.splitext(filename)[0]
+	Collection = db[name]
 	# Loading or Opening the json file 
 	with open(f"static/data/{filename}") as file: 
 		file_data = json.load(file) 
