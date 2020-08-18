@@ -11,8 +11,20 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-<!-- <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+<!-- <link rel="stylesheet" href="/docs/4.5/dist/css/bootstrap.min.css"  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Leaflet CSS -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+crossorigin=""/> -->
+
+
+    <!-- d3 JavaScript -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -42,7 +54,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="../static/styles/dashboard.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
   </head>
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -123,20 +135,25 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">United States Covid Data</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Confirmed</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Recovered</button>
+          <div class="btn-group mr-2" id="selDataset">
+            <button type="button" value= "dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
+            <button type="button" value= "dataset2" class="btn btn-sm btn-outline-secondary">Recovered</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Deaths</button>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            Month
-          </button>
+          <select id="selDate">
+            <option value="dataset1">All</option>
+            <option value="dataset2">March</option>
+            <option value="dataset3">April</option>
+            <option value="dataset4">May</option>
+            <option value="dataset5">June</option>
+            <option value="dataset5">July</option>
+      
+          </select>
+          </div>
         </div>
       </div>
 
-      <canvas class="my-4 w-100" id="plot" width="900" height="380"></canvas>
-
+      <div id="plot" ></div>
 
 
 
@@ -161,7 +178,7 @@
         </table>
       </div>
       
-      <canvas class="my-4 w-100" id="my_dataviz" width="900" height="380"></canvas>
+      <!-- <canvas class="my-4 w-100" id="" width="900" height="380"></canvas> -->
 
 
       <canvas class="my-4 w-100" id="heatmap" width="900" height="380"></canvas>
@@ -327,9 +344,55 @@
     </main>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<div id="my_dataviz"></div>
+
+<body>
+
+  <select id="selDataset">
+    <option value="dataset1">Cases</option>
+    <option value="dataset2">Deaths</option>
+    <option value="dataset3">Recoveries</option>
+  </select>
+  <select id="selDate">
+    <option value="dataset1">All</option>
+    <option value="dataset2">March</option>
+    <option value="dataset3">April</option>
+    <option value="dataset4">May</option>
+    <option value="dataset5">June</option>
+    <option value="dataset5">July</option>
+
+  </select>
+  
+  <div id="plot"></div>
+  
+
+
+
+
+
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+    <!-- API key -->
+    <script type="text/javascript" src="{{ url_for('static',filename='js/config.js') }}"></script>
+
+    <!-- JS  -->
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script> -->
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/densityGraph.js') }}"></script> -->
+    <script type="text/javascript" src="{{ url_for('static',filename='js/plots.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/choropleth.js') }}"></script>
+
+
+    <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+  </body>
+
+  
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-        <!-- <script src="dashboard.js"></script></body> -->
+        <script src="dashboard.js"></script></body> -->
 </html>
