@@ -2,6 +2,10 @@ from flask import Flask, render_template, redirect, Blueprint, jsonify
 import pymongo
 
 
+# Create an instance of Flask
+# app = Flask(__name__)
+# app.config["MONGO_URI"] = "mongodb://localhost:27017"
+
 # Use PyMongo to establish Mongo connection
 connection = "mongodb://localhost:27017"
 client= pymongo.MongoClient(connection)
@@ -32,7 +36,7 @@ def index():
 @app.route("/api")
 def api():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    data1= client["covid_db"].USdata.find({}, {'_id': False})
+    data1= client["covid_db"].GUSdata.find({}, {'_id': False})
 
     cases = [case for case in data1]
     data = {
@@ -45,7 +49,7 @@ def api():
 @app.route("/api/march")
 def marchapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    marchcoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"3/\d*/2020"}}, {'_id': False})
+    marchcoll= client["covid_db"].GUSdata.find({ "Date":  {"$regex":"3/\d*/2020"}}, {'_id': False})
 
     marchcases = [case for case in marchcoll]
     marchdata = {
@@ -58,7 +62,7 @@ def marchapi():
 @app.route("/api/april")
 def aprilapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    aprilcoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"4/\d*/2020"}}, {'_id': False})
+    aprilcoll= client["covid_db"].GUSdata.find({ "Date":  {"$regex":"4/\d*/2020"}}, {'_id': False})
 
     aprilcases = [case for case in aprilcoll]
     aprildata = {
@@ -70,43 +74,43 @@ def aprilapi():
 
     
 @app.route("/api/may")
-def Mayapi():
+def mayapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    Maycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"5/\d*/2020"}}, {'_id': False})
+    maycoll= client["covid_db"].GUSdata.find({ "Date":  {"$regex":"5/\d*/2020"}}, {'_id': False})
 
-    Maycases = [case for case in Maycoll]
-    Maydata = {
+    maycases = [case for case in maycoll]
+    maydata = {
 
-    "cases": Maycases
+    "cases": maycases
     }
 
-    return jsonify(Maydata)
+    return jsonify(maydata)
 
 @app.route("/api/june")
-def Juneapi():
+def juneapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    Junecoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"6/\d*/2020"}}, {'_id': False})
+    junecoll= client["covid_db"].GUSdata.find({ "Date":  {"$regex":"6/\d*/2020"}}, {'_id': False})
 
-    Junecases = [case for case in Junecoll]
-    Junedata = {
+    junecases = [case for case in junecoll]
+    junedata = {
 
-    "cases": Junecases
+    "cases": junecases
     }
 
-    return jsonify(Junedata)
+    return jsonify(junedata)
 
 @app.route("/api/july")
-def Julyapi():
+def julyapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
-    Julycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"7/\d*/2020"}}, {'_id': False})
+    julycoll= client["covid_db"].GUSdata.find({ "Date":  {"$regex":"7/\d*/2020"}}, {'_id': False})
 
-    Julycases = [case for case in Julycoll]
-    Julydata = {
+    julycases = [case for case in julycoll]
+    julydata = {
 
-    "cases": Julycases
+    "cases": julycases
     }
 
-    return jsonify(Julydata)
+    return jsonify(julydata)
 
 @app.route("/api/heat")
 def Heatapi():

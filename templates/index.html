@@ -14,6 +14,8 @@
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
+
 
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
@@ -27,7 +29,7 @@
 <body>
 
   <select id="selDataset">
-    <option value="dataset1">Cases</option>
+    <option value="dataset1">Confirmed</option>
     <option value="dataset2">Deaths</option>
     <option value="dataset3">Recoveries</option>
   </select>
@@ -40,7 +42,11 @@
     <option value="dataset5">July</option>
 
   </select>
+
+  <div id="pie"></div>
   
+
+
   <div id="plot"></div>
   
 
@@ -66,4 +72,6 @@
 
     <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
   </body>
+
+
 </html>
