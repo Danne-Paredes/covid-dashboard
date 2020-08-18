@@ -1,14 +1,8 @@
 from flask import Flask, render_template, redirect, Blueprint, jsonify
-from flask_pymongo import PyMongo
 import pymongo
 
 
-# Create an instance of Flask
-app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/classdb/students"
-
 # Use PyMongo to establish Mongo connection
-# mongo = PyMongo(app, uri="mongodb://localhost:27017")
 connection = "mongodb://localhost:27017"
 client= pymongo.MongoClient(connection)
 
@@ -75,7 +69,7 @@ def aprilapi():
     return jsonify(aprildata)
 
     
-@app.route("/api/May")
+@app.route("/api/may")
 def Mayapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     Maycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"5/\d*/2020"}}, {'_id': False})
@@ -88,7 +82,7 @@ def Mayapi():
 
     return jsonify(Maydata)
 
-@app.route("/api/June")
+@app.route("/api/june")
 def Juneapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     Junecoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"6/\d*/2020"}}, {'_id': False})
@@ -101,7 +95,7 @@ def Juneapi():
 
     return jsonify(Junedata)
 
-@app.route("/api/July")
+@app.route("/api/july")
 def Julyapi():
     # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     Julycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"7/\d*/2020"}}, {'_id': False})
@@ -113,6 +107,19 @@ def Julyapi():
     }
 
     return jsonify(Julydata)
+
+@app.route("/api/heat")
+def Heatapi():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    Heatcoll= client["covid_db"].test2.find({}, {'_id': False})
+
+    Heatcases = [case for case in Heatcoll]
+    Heatdata = {
+
+    "cases": Heatcases
+    }
+
+    return jsonify(Heatdata)
 
 
 
