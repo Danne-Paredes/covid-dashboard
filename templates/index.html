@@ -12,11 +12,49 @@
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
 
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
     <!-- Our CSS -->
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}"> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/heatmap.css') }}">
   </head>
   <body>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<body>
+
+  <select id="selDataset">
+    <option value="dataset1">Confirmed</option>
+    <option value="dataset2">Deaths</option>
+    <option value="dataset3">Recoveries</option>
+  </select>
+  <select id="selDate">
+    <option value="dataset1">All</option>
+    <option value="dataset2">March</option>
+    <option value="dataset3">April</option>
+    <option value="dataset4">May</option>
+    <option value="dataset5">June</option>
+    <option value="dataset5">July</option>
+
+  </select>
+  <div id = "pie">
+  <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+
+
+  <div id="plot"></div>
+  
+
 
 
     
