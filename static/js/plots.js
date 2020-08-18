@@ -2,6 +2,7 @@
 var margin = {top: 30, right: 30, bottom: 30, left: 50},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
 // append the svg object to the body of the page
 var svg = d3.select("#plot")
   .append("svg")
@@ -10,10 +11,22 @@ var svg = d3.select("#plot")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
+
+// var svg = d3.select("#pie")
+//     .append("svg")
+//     .attr("width", width + margin.left + margin.right)
+//     .attr("height", height + margin.top + margin.bottom)
+//     .append("g")
+//     .attr("transform",
+//             "translate(" + margin.left + "," + margin.top + ")");
+
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
 var route = "api"
+
 d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
@@ -68,19 +81,41 @@ function program(route) {
         console.log(casesum);
         console.log(casemean);
 
-        var piedata = [{
-            values: [recoveredsum, deathsum],
+        data = {
+            datasets: [{
+                data: [recoveredsum, deathsum],
+                backgroundColor:["#39ef67", "#f23c6d"],
+            }],
+        
+            // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: ['Hospital Recoveries', 'Deaths'],
-            marker: {colors: ["green", "red"]},
-            type: 'pie'
-          }];
+        };
+
+        // d3.selectAll("myChart").remove();
+        document.getElementById("pie").innerHTML = ""
+        // d3.select("pie").append("canvas").attr("width", 400).attr("height", 400).attr("id", "myChart");
+        
+
+        var ctx = document.getElementById('pie');
+
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+        });
+
+        // var piedata = [{
+        //     values: [recoveredsum, deathsum],
+        //     labels: ['Hospital Recoveries', 'Deaths'],
+        //     marker: {colors: ["green", "red"]},
+        //     type: 'pie'
+        //   }];
           
-          var layout = {
-            height: 400,
-            width: 500
-          };
+        //   var layout = {
+        //     height: 400,
+        //     width: 500
+        //   };
           
-        Plotly.newPlot('pie', piedata, layout);
+        // Plotly.newPlot('pie', piedata, layout);
 
 
 
@@ -89,7 +124,12 @@ function program(route) {
             var data = [{
                 x: xaxis,
                 y: yaxis,
-                marker: {color: "blue"}
+                fill: 'tozeroy',
+                fillcolor: '#f7d333',
+                // color: "#fc180c",
+                type: 'line',
+                mode: 'none',
+                // line: {color: "#fc180c"}
             }];
             Plotly.newPlot("plot", data)
         };
@@ -106,26 +146,26 @@ function program(route) {
             // Initialize x and y arrays
             var x = [];
             var y = [];
-            var marker = {};
+            var marker = "";
             if (dataset === 'dataset1') {
                 x = USdates;
                 y = UScases;
-                marker = {color: "blue"};
+                marker = "#f7d333";
             }
             if (dataset === 'dataset2') {
                 x = USdates;
                 y = USdeaths;
-                marker = {color: "red"};
+                marker = "#f23c6d";
             }
             if (dataset === 'dataset3') {
                 x = USdates;
                 y = USrecovered;
-                marker = {color: "green"};
+                marker = "#39ef67";
             }
             // Note the extra brackets around 'x' and 'y'
             Plotly.restyle("plot", "x", [x]);
             Plotly.restyle("plot", "y", [y]);
-            Plotly.restyle("plot", "marker", {marker})
+            Plotly.restyle("plot", "fillcolor", marker)
 
         };
     });
