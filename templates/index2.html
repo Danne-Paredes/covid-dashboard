@@ -137,9 +137,12 @@ crossorigin=""/>
         <h1 class="h2">United States Covid Data</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2" id="selDataset">
+            <!-- <button type="button"  href="calijuly.html" id= "dataset4" class="btn btn-sm btn-outline-secondary">California</button> -->
             <button type="button" id= "dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
             <button type="button" id= "dataset2" class="btn btn-sm btn-outline-secondary">Recovered</button>
             <button type="button" id= "dataset3" class="btn btn-sm btn-outline-secondary">Deaths</button>
+            <a href="calijuly" class="btn btn-info" role="button">California</a>
+            
           </div>
           <select id="selDate">
             <option value="dataset1">All</option>
@@ -155,17 +158,11 @@ crossorigin=""/>
 
 
 
-      
-
-
+      <div id = "pie">
+        <canvas id="myChart" width="10" height="10"></canvas>
+      </div>
   
       <div id="plot" ></div>
-
-      <div id = "pie">
-        <canvas id="myChart" width="400" height="400"></canvas>
-      </div>
-
-
 
       <h2>Monthly Case Information</h2>
       <div class="table-responsive">
