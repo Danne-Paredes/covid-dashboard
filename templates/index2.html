@@ -137,9 +137,9 @@ crossorigin=""/>
         <h1 class="h2">United States Covid Data</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2" id="selDataset">
-            <button type="button" value= "dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
-            <button type="button" value= "dataset2" class="btn btn-sm btn-outline-secondary">Recovered</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Deaths</button>
+            <button type="button" id= "dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
+            <button type="button" id= "dataset2" class="btn btn-sm btn-outline-secondary">Recovered</button>
+            <button type="button" id= "dataset3" class="btn btn-sm btn-outline-secondary">Deaths</button>
           </div>
           <select id="selDate">
             <option value="dataset1">All</option>
@@ -153,8 +153,17 @@ crossorigin=""/>
         </div>
       </div>
 
+
+
+      
+
+
+  
       <div id="plot" ></div>
-      <div id="pie" width="400" height="400"></div>
+
+      <div id = "pie">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
 
 
 
