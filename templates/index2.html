@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Dashboard Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+<!-- <link rel="stylesheet" href="/docs/4.5/dist/css/bootstrap.min.css"  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Leaflet CSS -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+crossorigin=""/> -->
+
+
+    <!-- d3 JavaScript -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+<meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Project 3: Covid Dashboard</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#">Group: Kurt, Paola, Danne, Seth </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Further Covid Info</span>
+          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file"></span>
+              Graphs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
+              Data
+            </a>
+          </li>
+        </ul>
+
+
+        <!-- <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Current month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Last quarter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Social engagement
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Year-end sale
+            </a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">United States Covid Data</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2" id="selDataset">
+            <button type="button" id= "dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
+            <button type="button" id= "dataset2" class="btn btn-sm btn-outline-secondary">Recovered</button>
+            <button type="button" id= "dataset3" class="btn btn-sm btn-outline-secondary">Deaths</button>
+          </div>
+          <select id="selDate">
+            <option value="dataset1">All</option>
+            <option value="dataset2">March</option>
+            <option value="dataset3">April</option>
+            <option value="dataset4">May</option>
+            <option value="dataset5">June</option>
+            <option value="dataset5">July</option>
+      
+          </select>
+          </div>
+        </div>
+      </div>
+
+      <div id = "pie">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+
+      <div id="plot" ></div>
+
+
+
+      <h2>Monthly Case Information</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Total Cases</th>
+              <th>Average New Cases per Day</th>
+              <th>Total Deaths</th>
+              <th>Hospital Recoveries</th>
+              <th>Total Approx Recoveries</th>
+            <tr>
+          <thead>
+          </tbody>
+            <td>2</td>
+            <td>Washington</td>
+            <td>47.14003705</td>
+            <td>-120.7913598</td>
+            <td>1</td>
+        </table>
+      </div>
+      
+      <!-- <canvas class="my-4 w-100" id="" width="900" height="380"></canvas> -->
+
+
+      <canvas class="my-4 w-100" id="heatmap" width="900" height="380"></canvas>
+
+
+
+
+      <h2>Data Examples</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>State/City</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Confirmed</th>
+              <th>Recovered</th>
+              <th>Deaths</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2</td>
+              <td>Washington</td>
+              <td>47.14003705</td>
+              <td>-120.7913598</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1/22/2020</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Washington</td>
+              <td>47.14003705</td>
+              <td>-120.7913598</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1/22/2020</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Chicago</td>
+              <td>38.21267844</td>
+              <td>-89.50299462</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1/24/2020</td>
+            </tr>
+            <tr>
+              <td>33</td>
+              <td>Boston, MA</td>
+              <td>42.3601</td>
+              <td>-71.0589</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>2/1/2020</td>
+            </tr>
+            <tr>
+              <td>50</td>
+              <td>Los Angeles, CA</td>
+              <td>34.0522</td>
+              <td>-118.2437</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>2/1/2020</td>
+            </tr>
+            <tr>
+              <td>59</td>
+              <td>Orange, CA</td>
+              <td>33.7879</td>
+              <td>-117.8531</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>2/4/2020</td>
+            </tr>
+            <tr>
+              <td>134</td>
+              <td>Seattle, WA</td>
+              <td>47.6062</td>
+              <td>-122.3321</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>2/12/2020</td>
+            </tr>
+            <tr>
+              <td>145</td>
+              <td>Seattle, WA</td>
+              <td>47.6062</td>
+              <td>-122.3321</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>2/12/2020</td>
+            </tr>
+            <!-- <tr>
+              <td>1,008</td>
+              <td>Fusce</td>
+              <td>nec</td>
+              <td>tellus</td>
+              <td>sed</td>
+            </tr>
+            <tr>
+              <td>1,009</td>
+              <td>augue</td>
+              <td>semper</td>
+              <td>porta</td>
+              <td>Mauris</td>
+            </tr>
+            <tr>
+              <td>1,010</td>
+              <td>massa</td>
+              <td>Vestibulum</td>
+              <td>lacinia</td>
+              <td>arcu</td>
+            </tr>
+            <tr>
+              <td>1,011</td>
+              <td>eget</td>
+              <td>nulla</td>
+              <td>Class</td>
+              <td>aptent</td>
+            </tr>
+            <tr>
+              <td>1,012</td>
+              <td>taciti</td>
+              <td>sociosqu</td>
+              <td>ad</td>
+              <td>litora</td>
+            </tr>
+            <tr>
+              <td>1,013</td>
+              <td>torquent</td>
+              <td>per</td>
+              <td>conubia</td>
+              <td>nostra</td>
+            </tr>
+            <tr>
+              <td>1,014</td>
+              <td>per</td>
+              <td>inceptos</td>
+              <td>himenaeos</td>
+              <td>Curabitur</td>
+            </tr>
+            <tr>
+              <td>1,015</td>
+              <td>sodales</td>
+              <td>ligula</td>
+              <td>in</td>
+              <td>libero</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+<div id="my_dataviz"></div>
+
+<body>
+
+  <select id="selDataset">
+    <option value="dataset1">Cases</option>
+    <option value="dataset2">Deaths</option>
+    <option value="dataset3">Recoveries</option>
+  </select>
+  <select id="selDate">
+    <option value="dataset1">All</option>
+    <option value="dataset2">March</option>
+    <option value="dataset3">April</option>
+    <option value="dataset4">May</option>
+    <option value="dataset5">June</option>
+    <option value="dataset5">July</option>
+
+  </select>
+  
+  <div id="plot"></div>
+  
+
+
+
+
+
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+    <!-- API key -->
+    <script type="text/javascript" src="{{ url_for('static',filename='js/config.js') }}"></script>
+
+    <!-- JS  -->
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script> -->
+    <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/densityGraph.js') }}"></script> -->
+    <script type="text/javascript" src="{{ url_for('static',filename='js/plots.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/choropleth.js') }}"></script>
+
+
+    <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+  </body>
+
+  
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="dashboard.js"></script></body> -->
+</html>

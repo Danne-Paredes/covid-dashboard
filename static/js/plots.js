@@ -2,7 +2,6 @@
 var margin = {top: 30, right: 30, bottom: 30, left: 50},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-
 // append the svg object to the body of the page
 var svg = d3.select("#plot")
   .append("svg")
@@ -11,22 +10,10 @@ var svg = d3.select("#plot")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-
-// var svg = d3.select("#pie")
-//     .append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//     .attr("transform",
-//             "translate(" + margin.left + "," + margin.top + ")");
-
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
-
 var route = "api"
-
 d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
@@ -91,16 +78,12 @@ function program(route) {
             labels: ['Hospital Recoveries', 'Deaths'],
         };
 
-        // d3.selectAll("myChart").remove();
-        document.getElementById("pie").innerHTML = ""
-        // d3.select("pie").append("canvas").attr("width", 400).attr("height", 400).attr("id", "myChart");
+        var ctx = document.getElementById('myChart');
         
-
-        var ctx = document.getElementById('pie');
-
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: data,
+            // options: {backgroundColor:["green", "red"]}
         });
 
         // var piedata = [{
@@ -165,7 +148,7 @@ function program(route) {
             // Note the extra brackets around 'x' and 'y'
             Plotly.restyle("plot", "x", [x]);
             Plotly.restyle("plot", "y", [y]);
-            Plotly.restyle("plot", "fillcolor", marker)
+            Plotly.restyle("plot", "fillcolor",marker)
 
         };
     });
