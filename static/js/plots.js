@@ -18,22 +18,22 @@ d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
     var dateset = dateMenu.property("value");
-    if (dateset === 'dataset1') {
+    if (dateset === 'set1') {
         route = "api"
     }
-    if (dateset === 'dataset2') {
+    if (dateset === 'set2') {
         route = "api/march"
     }
-    if (dateset === 'dataset3') {
+    if (dateset === 'set3') {
         route = "api/april"
     }
-    if (dateset === 'dataset4') {
+    if (dateset === 'set4') {
         route = "api/may"
     }
-    if (dateset === 'dataset5') {
+    if (dateset === 'set5') {
         route = "api/june"
     }
-    if (dateset === 'dataset6') {
+    if (dateset === 'set6') {
         route = "api/july"
     }
     program(route)
@@ -145,7 +145,7 @@ function program(route) {
             function updatedata2 () {
                 x = USdates;
                 y = USdeaths;
-                marker = "#f23c6d";
+                marker = "#39ef67";
                 console.log("yo")
                             // Note the extra brackets around 'x' and 'y'
                 Plotly.restyle("plot", "x", [x]);
@@ -157,13 +157,14 @@ function program(route) {
             function updatedata3 () {
                 x = USdates;
                 y = USrecovered;
-                marker = "#39ef67";
+                marker = "#f23c6d";
                 console.log("yo")
                             // Note the extra brackets around 'x' and 'y'
                 Plotly.restyle("plot", "x", [x]);
                 Plotly.restyle("plot", "y", [y]);
                 Plotly.restyle("plot", "fillcolor",marker)
             }
+            
 
 
         
