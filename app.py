@@ -31,6 +31,26 @@ def index():
     # mars = mongo.db.mars.find_one()
     return render_template("index2.html")
 
+@app.route("/calijuly")
+def calijuly():
+    # mars = mongo.db.mars.find_one()
+    return render_template("calijuly.html")
+
+@app.route("/dataindex")
+def dataindex():
+    # mars = mongo.db.mars.find_one()
+    return render_template("dataindex.html")
+
+@app.route("/pie")
+def pieindex():
+    # mars = mongo.db.mars.find_one()
+    return render_template("pieindex.html")
+
+@app.route("/heatindex")
+def heatindex():
+    # mars = mongo.db.mars.find_one()
+    return render_template("heatindex.html")
+
 
 # Route that will trigger the scrape function
 @app.route("/api")

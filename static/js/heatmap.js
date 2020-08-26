@@ -52,7 +52,7 @@ var myMap = L.map("map", {
 function choroMap(route) {
   // Grab data with d3
   d3.json(route).then(function(data) {
-    // console.log(data)
+    console.log(data)
 
     // Create a new choropleth layer
     geojson = L.choropleth(data.cases[0], {
@@ -111,6 +111,7 @@ function choroMap(route) {
 
     // Adding legend to the map
     legend.addTo(myMap);
+    map.scrollZoom.disable();
 
   });
 }

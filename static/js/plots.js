@@ -13,7 +13,8 @@ var svg = d3.select("#plot")
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
-var route = "api"
+var route = "api";
+var myPieChart=null;
 d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
@@ -60,6 +61,7 @@ function program(route) {
         var deathmean = math.mean(USdeaths);
         var recoveredsum = math.sum(USrecovered);
         var recoveredmean = math.mean(USrecovered);
+        var totalrecovered = casesum - deathsum
 
         console.log(recoveredsum);
         console.log(recoveredmean);
@@ -67,6 +69,15 @@ function program(route) {
         console.log(deathmean);
         console.log(casesum);
         console.log(casemean);
+
+        d3.select("tbody")
+        .selectAll("tr")
+        .enter()
+        .append("tr")
+        .html(function(d) {
+            return `<td>${casesum}</td><td>${casemean}</td><td>${deathsum}</td><td>${recoveredsum}</td><td>${totalrecoverd}</td>`;
+         });
+            
 
         piedata = {
             datasets: [{
@@ -76,14 +87,28 @@ function program(route) {
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: ['Hospital Recoveries', 'Deaths'],
         };
-        var ctx = document.getElementById('myChart');
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: piedata,
+
+            
+        
+
+        function drawChart(){
+            if(myPieChart!=null){
+                myPieChart.destroy();
+            }
+            // Get the context of the canvas element we want to select
+            // var ctx = objChart.getContext("2d");
+            // myPieChart = new Chart(ctx).Pie(piedata, {animateScale: true});
+
+            var ctx = document.getElementById('myChart');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: piedata,
+                animateScale: false
             // options: {backgroundColor:["green", "red"]}
-        });
+            });
+        };
 
-
+        drawChart();
         // var piedata = [{
         //     values: [recoveredsum, deathsum],
         //     labels: ['Hospital Recoveries', 'Deaths'],
