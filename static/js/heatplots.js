@@ -50,7 +50,7 @@ function program(route) {
         var USrecovered = USdata.cases.map(USdata => USdata.Recovered);
         var USdeaths = USdata.cases.map(USdata => USdata.Deaths);
         var USdates = USdata.cases.map(USdata => USdata.Date);
-        init(USdates, UScases);
+        // init(USdates, UScases);
 
         console.log(USdata);
         console.log(USdates);

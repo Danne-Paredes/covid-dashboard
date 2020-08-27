@@ -70,6 +70,20 @@ function program(route) {
         console.log(casesum);
         console.log(casemean);
 
+        casemean = Math.round(casemean * 100) / 100
+
+        summary = [[casesum, casemean, deathsum, recoveredsum, totalrecovered]]
+        
+        d3.select("tbody").html("")
+        d3.select("tbody")
+        .selectAll("tr")
+        .data(summary)
+        .enter()
+        .append("tr")
+        .html(function(d) {
+            return `<td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td><td>${d[4]}</td>`;
+         });
+
         // d3.select("tbody")
         // .selectAll("tr")
         // .enter()
@@ -78,7 +92,7 @@ function program(route) {
         //     return `<td>${casesum}</td><td>${casemean}</td><td>${deathsum}</td><td>${recoveredsum}</td><td>${totalrecoverd}</td>`;
         //  });
             
-
+        var ctx = document.getElementById('myChart');
         piedata = {
             datasets: [{
                 data: [recoveredsum, deathsum],
@@ -88,11 +102,28 @@ function program(route) {
             labels: ['Hospital Recoveries', 'Deaths'],
         };
 
+        // var myPieChart = new Chart(ctx, {
+        //     type: 'pie',
+        //     data: piedata,
+        //     animateScale: false
+        // // options: {backgroundColor:["green", "red"]}
+        // });
+        // function removeData(chart) {
+        //     chart.data.labels.pop();
+        //     chart.data.datasets.forEach((dataset) => {
+        //         dataset.data.pop();
+        //     });
+        //     chart.update();
+        // };
+        // removeData(myPieChart)
+
             
         
 
         function drawChart(){
-            var ctx = document.getElementById('myChart');
+            
+            
+            
             // function removeData(chart) {
             //     chart.data.labels.pop();
             //     chart.data.datasets.forEach((dataset) => {
@@ -104,15 +135,24 @@ function program(route) {
             // var ctx = objChart.getContext("2d");
             // myPieChart = new Chart(ctx).Pie(piedata, {animateScale: true});
             // removeData(ctx)
-            
-            var myPieChart = new Chart(ctx, {
+            function removeData(chart) {
+                chart.data.labels.pop();
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+                chart.update();
+            };
+            if (myPieChart){
+            removeData(myPieChart)}
+            myPieChart = new Chart(ctx, {
                 type: 'pie',
                 data: piedata,
                 animateScale: false
             // options: {backgroundColor:["green", "red"]}
             });
-        };
 
+        };
+        
         drawChart();
         // var piedata = [{
         //     values: [recoveredsum, deathsum],

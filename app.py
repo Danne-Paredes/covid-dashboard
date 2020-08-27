@@ -52,6 +52,12 @@ def heatindex():
     return render_template("heatindex.html")
 
 
+
+
+
+
+
+
 # Route that will trigger the scrape function
 @app.route("/api")
 def api():
@@ -131,6 +137,107 @@ def julyapi():
     }
 
     return jsonify(julydata)
+
+
+
+
+
+
+
+
+
+
+
+# Route that will trigger the scrape function
+@app.route("/apidata")
+def apidata():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    data2= client["covid_db"].USdata.find({}, {'_id': False})
+
+    cases2 = [case for case in data2]
+    data2 = {
+
+    "cases": cases2
+    }
+
+    return jsonify(data2)
+
+@app.route("/api/marchdata")
+def marchdata():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    marchcoll2= client["covid_db"].USdata.find({ "Date":  {"$regex":"3/\d*/2020"}}, {'_id': False})
+
+    marchcases2 = [case for case in marchcoll2]
+    marchdata2 = {
+
+    "cases": marchcases2
+    }
+
+    return jsonify(marchdata2)
+
+@app.route("/api/aprildata")
+def aprildata():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    aprilcoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"4/\d*/2020"}}, {'_id': False})
+
+    aprilcases = [case for case in aprilcoll]
+    aprildata = {
+
+    "cases": aprilcases
+    }
+
+    return jsonify(aprildata)
+
+    
+@app.route("/api/maydata")
+def maydata():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    maycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"5/\d*/2020"}}, {'_id': False})
+
+    maycases = [case for case in maycoll]
+    maydata = {
+
+    "cases": maycases
+    }
+
+    return jsonify(maydata)
+
+@app.route("/api/junedata")
+def junedata():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    junecoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"6/\d*/2020"}}, {'_id': False})
+
+    junecases = [case for case in junecoll]
+    junedata = {
+
+    "cases": junecases
+    }
+
+    return jsonify(junedata)
+
+@app.route("/api/julydata")
+def julydata():
+    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
+    julycoll= client["covid_db"].USdata.find({ "Date":  {"$regex":"7/\d*/2020"}}, {'_id': False})
+
+    julycases = [case for case in julycoll]
+    julydata = {
+
+    "cases": julycases
+    }
+
+    return jsonify(julydata)
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route("/api/all-heat")
 def heatAPI():
