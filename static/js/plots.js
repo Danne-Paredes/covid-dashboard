@@ -79,36 +79,41 @@ function program(route) {
          });
             
 
-        piedata = {
-            datasets: [{
-                data: [recoveredsum, deathsum],
-                backgroundColor:["#39EF67", "#F23C6D"],
-            }],
-            // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: ['Hospital Recoveries', 'Deaths'],
-        };
+        // piedata = {
+        //     datasets: [{
+        //         data: [recoveredsum, deathsum],
+        //         backgroundColor:["#39EF67", "#F23C6D"],
+        //     }],
+        //     // These labels appear in the legend and in the tooltips when hovering different arcs
+        //     labels: ['Hospital Recoveries', 'Deaths'],
+        // };
 
             
         
 
-        function drawChart(){
-            if(myPieChart!=null){
-                myPieChart.destroy();
-            }
-            // Get the context of the canvas element we want to select
-            // var ctx = objChart.getContext("2d");
-            // myPieChart = new Chart(ctx).Pie(piedata, {animateScale: true});
+        // function drawChart(){
+        //     var ctx = document.getElementById('myChart');
+        //     // function removeData(chart) {
+        //     //     chart.data.labels.pop();
+        //     //     chart.data.datasets.forEach((dataset) => {
+        //     //         dataset.data.pop();
+        //     //     });
+        //     //     chart.update();
+        //     // }
+        //     // Get the context of the canvas element we want to select
+        //     // var ctx = objChart.getContext("2d");
+        //     // myPieChart = new Chart(ctx).Pie(piedata, {animateScale: true});
+        //     // removeData(ctx)
+            
+        //     var myPieChart = new Chart(ctx, {
+        //         type: 'pie',
+        //         data: piedata,
+        //         animateScale: false
+        //     // options: {backgroundColor:["green", "red"]}
+        //     });
+        // };
 
-            var ctx = document.getElementById('myChart');
-            var myPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: piedata,
-                animateScale: false
-            // options: {backgroundColor:["green", "red"]}
-            });
-        };
-
-        drawChart();
+        // drawChart();
         // var piedata = [{
         //     values: [recoveredsum, deathsum],
         //     labels: ['Hospital Recoveries', 'Deaths'],
