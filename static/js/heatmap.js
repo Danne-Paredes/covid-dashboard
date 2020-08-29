@@ -111,7 +111,7 @@ function choroMap(route) {
 
     // Adding legend to the map
     legend.addTo(myMap);
-    map.scrollZoom.disable();
+    myMap.scrollZoom.disable();
 
   });
 }

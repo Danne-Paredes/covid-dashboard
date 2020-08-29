@@ -97,7 +97,10 @@ function program(route) {
                 mode: 'none',
                 // line: {color: "#fc180c"}
             }];
-            Plotly.newPlot("plot", data)
+            var layout = {
+                yaxis: {range:[0,4000000]}
+            };
+            Plotly.newPlot("plot", data, layout)
         };
 
         console.log(USdeaths)

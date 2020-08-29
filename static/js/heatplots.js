@@ -1,20 +1,20 @@
-// set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 30, left: 50},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-// append the svg object to the body of the page
-var svg = d3.select("#plot")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-// Append a group to the SVG area and shift ('translate') it to the right and to the bottom
-var chartGroup = svg.append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+// // set the dimensions and margins of the graph
+// var margin = {top: 30, right: 30, bottom: 30, left: 50},
+//     width = 460 - margin.left - margin.right,
+//     height = 400 - margin.top - margin.bottom;
+// // append the svg object to the body of the page
+// var svg = d3.select("#plot")
+//   .append("svg")
+//     .attr("width", width + margin.left + margin.right)
+//     .attr("height", height + margin.top + margin.bottom)
+//   .append("g")
+//     .attr("transform",
+//           "translate(" + margin.left + "," + margin.top + ")");
+// // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
+// var chartGroup = svg.append("g")
+//   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 var route = "api";
-var myPieChart=null;
+// var myPieChart=null;
 d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
@@ -137,19 +137,19 @@ function program(route) {
 
 
         // Initializes the page with a default plot 
-        function init(xaxis, yaxis) {
-            var data = [{
-                x: xaxis,
-                y: yaxis,
-                fill: 'tozeroy',
-                fillcolor: '#f7d333',
-                // color: "#fc180c",
-                type: 'line',
-                mode: 'none',
-                // line: {color: "#fc180c"}
-            }];
-            Plotly.newPlot("plot", data)
-        };
+        // function init(xaxis, yaxis) {
+        //     var data = [{
+        //         x: xaxis,
+        //         y: yaxis,
+        //         fill: 'tozeroy',
+        //         fillcolor: '#f7d333',
+        //         // color: "#fc180c",
+        //         type: 'line',
+        //         mode: 'none',
+        //         // line: {color: "#fc180c"}
+        //     }];
+        //     Plotly.newPlot("plot", data)
+        // };
         // Call updatePlotly() when a change takes place to the DOM
         // d3.selectAll("#selDataset").on("change", updatePlotly);
         // This function is called when a dropdown menu item is selected
@@ -158,48 +158,48 @@ function program(route) {
             // var dropdownMenu = d3.select("#selDataset");
             // Assign the value of the dropdown menu option to a variable
             // var dataset = dropdownMenu.property("value");
-            console.log(USdeaths)
-            console.log(USrecovered)
-            // Initialize x and y arrays
-            var x = [];
-            var y = [];
-            var marker = "";
-            d3.select("#dataset1").on("click", updatedata1);
-            // if (dataset === 'dataset1') {
-            function updatedata1 () {
-                x = USdates;
-                y = UScases;
-                marker = "#f7d333";
-                console.log("yo")
-                            // Note the extra brackets around 'x' and 'y'
-                Plotly.restyle("plot", "x", [x]);
-                Plotly.restyle("plot", "y", [y]);
-                Plotly.restyle("plot", "fillcolor",marker)
-            }
-            d3.select("#dataset2").on("click", updatedata2);
-            // if (dataset === 'dataset2') {
-            function updatedata2 () {
-                x = USdates;
-                y = USdeaths;
-                marker = "#39ef67";
-                console.log("yo")
-                            // Note the extra brackets around 'x' and 'y'
-                Plotly.restyle("plot", "x", [x]);
-                Plotly.restyle("plot", "y", [y]);
-                Plotly.restyle("plot", "fillcolor",marker)
-            }
-            d3.select("#dataset3").on("click", updatedata3);
-            // if (dataset === 'dataset3') {
-            function updatedata3 () {
-                x = USdates;
-                y = USrecovered;
-                marker = "#f23c6d";
-                console.log("yo")
-                            // Note the extra brackets around 'x' and 'y'
-                Plotly.restyle("plot", "x", [x]);
-                Plotly.restyle("plot", "y", [y]);
-                Plotly.restyle("plot", "fillcolor",marker)
-            }
+            // console.log(USdeaths)
+            // console.log(USrecovered)
+            // // Initialize x and y arrays
+            // var x = [];
+            // var y = [];
+            // var marker = "";
+            // d3.select("#dataset1").on("click", updatedata1);
+            // // if (dataset === 'dataset1') {
+            // function updatedata1 () {
+            //     x = USdates;
+            //     y = UScases;
+            //     marker = "#f7d333";
+            //     console.log("yo")
+            //                 // Note the extra brackets around 'x' and 'y'
+            //     Plotly.restyle("plot", "x", [x]);
+            //     Plotly.restyle("plot", "y", [y]);
+            //     Plotly.restyle("plot", "fillcolor",marker)
+            // }
+            // d3.select("#dataset2").on("click", updatedata2);
+            // // if (dataset === 'dataset2') {
+            // function updatedata2 () {
+            //     x = USdates;
+            //     y = USdeaths;
+            //     marker = "#39ef67";
+            //     console.log("yo")
+            //                 // Note the extra brackets around 'x' and 'y'
+            //     Plotly.restyle("plot", "x", [x]);
+            //     Plotly.restyle("plot", "y", [y]);
+            //     Plotly.restyle("plot", "fillcolor",marker)
+            // }
+            // d3.select("#dataset3").on("click", updatedata3);
+            // // if (dataset === 'dataset3') {
+            // function updatedata3 () {
+            //     x = USdates;
+            //     y = USrecovered;
+            //     marker = "#f23c6d";
+            //     console.log("yo")
+            //                 // Note the extra brackets around 'x' and 'y'
+            //     Plotly.restyle("plot", "x", [x]);
+            //     Plotly.restyle("plot", "y", [y]);
+            //     Plotly.restyle("plot", "fillcolor",marker)
+            // }
             
 
 

@@ -12,7 +12,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-    <!-- <link rel="stylesheet" href="/docs/4.5/dist/css/bootstrap.min.css"  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
@@ -104,7 +103,7 @@
                 </select>
             </div>
         </div>
-        </div>
+    </main>
 
 
 
@@ -127,7 +126,7 @@
             </table>
         </div>
 
-        <body>
+
 
             <select id="selDataset">
                 <option value="dataset1">Cases</option>
@@ -158,9 +157,10 @@
                 crossorigin=""></script>
 
             <!-- API key -->
-            <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/config.js') }}"></script> -->
+            <script type="text/javascript" src="{{ url_for('static',filename='js/config.js') }}"></script>
 
             <!-- JS  -->
+            
             <script type="text/javascript" src="{{ url_for('static',filename='js/heatplots.js') }}"></script>
             <script type="text/javascript" src="{{ url_for('static',filename='js/heatmap.js') }}"></script>
             <script type="text/javascript" src="{{ url_for('static',filename='js/choropleth.js') }}"></script>
@@ -177,5 +177,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         <script src="dashboard.js"></script></body> -->
-
+            
 </html>
