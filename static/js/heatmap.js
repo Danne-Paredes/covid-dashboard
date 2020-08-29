@@ -2,6 +2,7 @@
 var myMap = L.map("map", {
     center: [38.7128, -97.0059],
     zoom: 5,
+    scrollWheelZoom: false
 
   })
 
@@ -111,7 +112,7 @@ function choroMap(route) {
 
     // Adding legend to the map
     legend.addTo(myMap);
-    myMap.scrollZoom.disable();
+    // myMap.scrollZoom.disable();
 
   });
 }
