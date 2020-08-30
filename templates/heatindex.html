@@ -87,9 +87,9 @@
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2" id="selDataset">
                     <!-- <button type="button"  href="calijuly.html" id= "dataset4" class="btn btn-sm btn-outline-secondary">California</button> -->
-                    <button type="button" id="dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
+                    <!-- <button type="button" id="dataset1" class="btn btn-sm btn-outline-secondary">Confirmed</button>
                     <button type="button" id="dataset2" class="btn btn-sm btn-outline-secondary">Recovered</button>
-                    <button type="button" id="dataset3" class="btn btn-sm btn-outline-secondary">Deaths</button>
+                    <button type="button" id="dataset3" class="btn btn-sm btn-outline-secondary">Deaths</button> -->
 
 
                 </div>
@@ -126,29 +126,7 @@
             </table>
         </div>
 
-
-
-            <select id="selDataset">
-                <option value="dataset1">Cases</option>
-                <option value="dataset2">Deaths</option>
-                <option value="dataset3">Recoveries</option>
-            </select>
-            <select id="selDate">
-                <option value="dataset1">All</option>
-                <option value="dataset2">March</option>
-                <option value="dataset3">April</option>
-                <option value="dataset4">May</option>
-                <option value="dataset5">June</option>
-                <option value="dataset6">July</option>
-
-            </select>
-
             <div id="map"></div>
-
-
-
-
-
 
 
             <!-- Leaflet JS -->
@@ -160,7 +138,7 @@
             <script type="text/javascript" src="{{ url_for('static',filename='js/config.js') }}"></script>
 
             <!-- JS  -->
-            
+
             <script type="text/javascript" src="{{ url_for('static',filename='js/heatplots.js') }}"></script>
             <script type="text/javascript" src="{{ url_for('static',filename='js/heatmap.js') }}"></script>
             <script type="text/javascript" src="{{ url_for('static',filename='js/choropleth.js') }}"></script>

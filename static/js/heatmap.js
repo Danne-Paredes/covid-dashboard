@@ -26,22 +26,22 @@ var myMap = L.map("map", {
   function updateAPI () {
       var dateMenu = d3.select("#selDate");
       var dateset = dateMenu.property("value");
-      if (dateset === 'dataset1') {
+      if (dateset === 'set1') {
           route = "api/all-heat"
       }
-      if (dateset === 'dataset2') {
+      if (dateset === 'set2') {
           route = "api/march-heat"
       }
-      if (dateset === 'dataset3') {
+      if (dateset === 'set3') {
           route = "api/april-heat"
       }
-      if (dateset === 'dataset4') {
+      if (dateset === 'set4') {
           route = "api/may-heat"
       }
-      if (dateset === 'dataset5') {
+      if (dateset === 'set5') {
           route = "api/june-heat"
       }
-      if (dateset === 'dataset6') {
+      if (dateset === 'set6') {
           route = "api/july-heat"
       }
       console.log(dateset)
@@ -111,6 +111,7 @@ function choroMap(route) {
     };
 
     // Adding legend to the map
+    if(legend instanceof L.Control){map.removeControl(legend);}
     legend.addTo(myMap);
     // myMap.scrollZoom.disable();
 
