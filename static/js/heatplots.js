@@ -13,34 +13,40 @@
 // // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 // var chartGroup = svg.append("g")
 //   .attr("transform", `translate(${margin.left}, ${margin.top})`);
-var route = "api";
+var plotroute = "api";
 // var myPieChart=null;
-d3.selectAll("#selDate").on("change", updateRoute);
+d3.selectAll("#selDate").on("change", updateRoute).on("change", updateAPI);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
     var dateset = dateMenu.property("value");
     if (dateset === 'set1') {
-        route = "api"
+        plotroute = "api"
+        console.log("heatplots1")
     }
     if (dateset === 'set2') {
-        route = "api/march"
+        plotroute = "api/march"
+        console.log("heatplots2")
     }
     if (dateset === 'set3') {
-        route = "api/april"
+        plotroute = "api/april"
+        console.log("heatplots3")
     }
     if (dateset === 'set4') {
-        route = "api/may"
+        plotroute = "api/may"
+        console.log("heatplots4")
     }
     if (dateset === 'set5') {
-        route = "api/june"
+        plotroute = "api/june"
+        console.log("heatplots5")
     }
     if (dateset === 'set6') {
-        route = "api/july"
+        plotroute = "api/july"
+        console.log("heatplots6")
     }
-    program(route)
-    console.log(route)
+    program(plotroute)
+    console.log(plotroute)
 };
-program(route)
+program(plotroute)
 function program(route) {
     // get the data
     d3.json(route).then(function (data) {

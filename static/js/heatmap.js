@@ -19,7 +19,7 @@ var myMap = L.map("map", {
 
   
 
-  var route = "/api/all-heat"
+  var plotroute = "/api/all-heat"
   d3.selectAll("#selDate").on("change", updateAPI);
   var geojson;
       
@@ -27,28 +27,28 @@ var myMap = L.map("map", {
       var dateMenu = d3.select("#selDate");
       var dateset = dateMenu.property("value");
       if (dateset === 'set1') {
-          route = "api/all-heat"
+          plotroute = "api/all-heat"
       }
       if (dateset === 'set2') {
-          route = "api/march-heat"
+          plotroute = "api/march-heat"
       }
       if (dateset === 'set3') {
-          route = "api/april-heat"
+          plotroute = "api/april-heat"
       }
       if (dateset === 'set4') {
-          route = "api/may-heat"
+          plotroute = "api/may-heat"
       }
       if (dateset === 'set5') {
-          route = "api/june-heat"
+          plotroute = "api/june-heat"
       }
       if (dateset === 'set6') {
-          route = "api/july-heat"
+          plotroute = "api/july-heat"
       }
       console.log(dateset)
-      choroMap(route)
+      choroMap(plotroute)
   };
 
-  choroMap(route)
+  choroMap(plotroute)
 
 function choroMap(route) {
   // Grab data with d3
@@ -111,9 +111,9 @@ function choroMap(route) {
     };
 
     // Adding legend to the map
-    if(legend instanceof L.Control){map.removeControl(legend);}
+    if(legend instanceof L.Control){myMap.removeControl(legend);}
     legend.addTo(myMap);
-    // myMap.scrollZoom.disable();
+
 
   });
 }
