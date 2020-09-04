@@ -20,39 +20,47 @@ var myMap = L.map("map", {
   
 
   var plotroute = "/api/all-heat"
-  d3.selectAll("#selDate").on("change", updateAPI);
+  var route = "api";
+  d3.selectAll("#selDate").on("change", updateAPI)
   var geojson;
       
   function updateAPI () {
       var dateMenu = d3.select("#selDate");
       var dateset = dateMenu.property("value");
       if (dateset === 'set1') {
-          plotroute = "api/all-heat"
+          plotroute = "api/all-heat";
+          route = "api"
       }
       if (dateset === 'set2') {
-          plotroute = "api/march-heat"
+          plotroute = "api/march-heat";
+          route = "api/march"
       }
       if (dateset === 'set3') {
-          plotroute = "api/april-heat"
+          plotroute = "api/april-heat";
+          route = "api/april"
       }
       if (dateset === 'set4') {
-          plotroute = "api/may-heat"
+          plotroute = "api/may-heat";
+          route = "api/may"
       }
       if (dateset === 'set5') {
-          plotroute = "api/june-heat"
+          plotroute = "api/june-heat";
+          route = "api/june"
       }
       if (dateset === 'set6') {
-          plotroute = "api/july-heat"
+          plotroute = "api/july-heat";
+          route = "api/july"
       }
       console.log(dateset)
-      choroMap(plotroute)
+      console.log(route)
+      choroMap(plotroute, route)
   };
 
-  choroMap(plotroute)
+  choroMap(plotroute, route)
 
-function choroMap(route) {
+function choroMap(plotroute, route) {
   // Grab data with d3
-  d3.json(route).then(function(data) {
+  d3.json(plotroute).then(function(data) {
     console.log(data)
 
     // Create a new choropleth layer
@@ -116,4 +124,47 @@ function choroMap(route) {
 
 
   });
+
+  d3.json(route).then(function (tabledata) {
+    USdata = tabledata
+    // var USdata = data.filter(function (d) { return d.Country === "US" });
+    var UScases = USdata.cases.map(USdata => USdata.Confirmed);
+    var USrecovered = USdata.cases.map(USdata => USdata.Recovered);
+    var USdeaths = USdata.cases.map(USdata => USdata.Deaths);
+    var USdates = USdata.cases.map(USdata => USdata.Date);
+    // init(USdates, UScases);
+
+    console.log(USdata);
+    console.log(USdates);
+
+    var casesum = math.sum(UScases);
+    var casemean = math.mean(UScases);
+    var deathsum = math.sum(USdeaths);
+    var deathmean = math.mean(USdeaths);
+    var recoveredsum = math.sum(USrecovered);
+    var recoveredmean = math.mean(USrecovered);
+    var totalrecovered = casesum - deathsum
+
+    console.log(recoveredsum);
+    console.log(recoveredmean);
+    console.log(deathsum);
+    console.log(deathmean);
+    console.log(casesum);
+    console.log(casemean);
+
+    casemean = Math.round(casemean * 100) / 100
+    
+    summary = [[casesum, casemean, deathsum, recoveredsum, totalrecovered]]
+    
+    d3.select("tbody").html("")
+    d3.select("tbody")
+    .selectAll("tr")
+    .data(summary)
+    .enter()
+    .append("tr")
+    .html(function(d) {
+        return `<td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td><td>${d[4]}</td>`;
+     });
+
+});
 }
