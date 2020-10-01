@@ -5,7 +5,7 @@ var myMap = L.map("map", {
     scrollWheelZoom: false
 
   })
-
+  divlegend=null
     
   // Adding tile layer
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -53,6 +53,10 @@ var myMap = L.map("map", {
       }
       console.log(dateset)
       console.log(route)
+      // myMap.off()
+      // myMap.remove()
+      // $("#map").remove();
+      if (divlegend){L.DomUtil.remove(divlegend)};
       choroMap(plotroute, route)
   };
 
@@ -92,11 +96,11 @@ function choroMap(plotroute, route) {
     }).addTo(myMap);
     console.log(geojson)
     
-
+    
     // Set up the legend
     var legend = L.control({ position: "bottomright" });
     legend.onAdd = function() {
-      var div = L.DomUtil.create("div", "info legend");
+      var divlegend = L.DomUtil.create("div", "info legend");
       var limits = geojson.options.limits;
       var colors = geojson.options.colors;
       var labels = [];
@@ -108,18 +112,18 @@ function choroMap(plotroute, route) {
           "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
         "</div>";
 
-      div.innerHTML = legendInfo;
+      divlegend.innerHTML = legendInfo;
 
       limits.forEach(function(limit, index) {
         labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
       });
 
-      div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-      return div;
+      divlegend.innerHTML += "<ul>" + labels.join("") + "</ul>";
+      return divlegend;
     };
-
+    
     // Adding legend to the map
-    if(legend instanceof L.Control){myMap.removeControl(legend);}
+    myMap.removeControl(legend);
     legend.addTo(myMap);
 
 

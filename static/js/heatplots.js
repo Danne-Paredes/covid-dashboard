@@ -15,7 +15,7 @@
 //   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 var plotroute = "api";
 // var myPieChart=null;
-d3.selectAll("#selDate").on("change", updateRoute).on("change", updateAPI);
+d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute () {
     var dateMenu = d3.select("#selDate");
     var dateset = dateMenu.property("value");
@@ -69,12 +69,12 @@ function program(route) {
         var recoveredmean = math.mean(USrecovered);
         var totalrecovered = casesum - deathsum
 
-        console.log(recoveredsum);
-        console.log(recoveredmean);
-        console.log(deathsum);
-        console.log(deathmean);
-        console.log(casesum);
-        console.log(casemean);
+        // console.log(recoveredsum);
+        // console.log(recoveredmean);
+        // console.log(deathsum);
+        // console.log(deathmean);
+        // console.log(casesum);
+        // console.log(casemean);
 
         casemean = Math.round(casemean * 100) / 100
         
