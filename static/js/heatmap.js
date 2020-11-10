@@ -17,50 +17,65 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
 
-  
+  /*
+  Use JS to change which API page to pull from
+  */
 
+  // Set Initial Route
   var plotroute = "/api/all-heat"
   var route = "api";
+
+  // Use D3 to call function to update datase on dropdown change
   d3.selectAll("#selDate").on("change", updateAPI)
+
+  // Create variable
   var geojson;
       
+  // Function to run in D3 line from above
   function updateAPI () {
-      var dateMenu = d3.select("#selDate");
-      var dateset = dateMenu.property("value");
-      if (dateset === 'set1') {
-          plotroute = "api/all-heat";
-          route = "api"
-      }
-      if (dateset === 'set2') {
-          plotroute = "api/march-heat";
-          route = "api/march"
-      }
-      if (dateset === 'set3') {
-          plotroute = "api/april-heat";
-          route = "api/april"
-      }
-      if (dateset === 'set4') {
-          plotroute = "api/may-heat";
-          route = "api/may"
-      }
-      if (dateset === 'set5') {
-          plotroute = "api/june-heat";
-          route = "api/june"
-      }
-      if (dateset === 'set6') {
-          plotroute = "api/july-heat";
-          route = "api/july"
-      }
-      console.log(dateset)
-      console.log(route)
-      // myMap.off()
-      // myMap.remove()
-      // $("#map").remove();
-      if (divlegend){L.DomUtil.remove(divlegend)};
-      choroMap(plotroute, route)
+    // grab dropdown in html with id selDate
+    var dateMenu = d3.select("#selDate");
+    // grab value from above variable
+    var dateset = dateMenu.property("value");
+    
+    // series of if/then statements to determine which dataset is used
+    if (dateset === 'set1') {
+        plotroute = "api/all-heat";
+        route = "api"
+    }
+    if (dateset === 'set2') {
+        plotroute = "api/march-heat";
+        route = "api/march"
+    }
+    if (dateset === 'set3') {
+        plotroute = "api/april-heat";
+        route = "api/april"
+    }
+    if (dateset === 'set4') {
+        plotroute = "api/may-heat";
+        route = "api/may"
+    }
+    if (dateset === 'set5') {
+        plotroute = "api/june-heat";
+        route = "api/june"
+    }
+    if (dateset === 'set6') {
+        plotroute = "api/july-heat";
+        route = "api/july"
+    }
+    
+    // myMap.off()
+    // myMap.remove()
+    // $("#map").remove();
+    // if (divlegend){L.DomUtil.remove(divlegend)};
+
+
+    // run function to update map
+    choroMap(plotroute, route)
   };
 
-  choroMap(plotroute, route)
+// run function to create initial map
+choroMap(plotroute, route)
 
 function choroMap(plotroute, route) {
   // Grab data with d3
@@ -99,6 +114,7 @@ function choroMap(plotroute, route) {
     
     // Set up the legend
     var legend = L.control({ position: "bottomright" });
+    // Add legend to map
     legend.onAdd = function() {
       var divlegend = L.DomUtil.create("div", "info legend");
       var limits = geojson.options.limits;
@@ -123,43 +139,31 @@ function choroMap(plotroute, route) {
     };
     
     // Adding legend to the map
-    myMap.removeControl(legend);
     legend.addTo(myMap);
 
 
   });
 
+  // Table data based on selected month
   d3.json(route).then(function (tabledata) {
+    // data variable for table
     USdata = tabledata
-    // var USdata = data.filter(function (d) { return d.Country === "US" });
+
+    // filter datasets and run math operations 
     var UScases = USdata.cases.map(USdata => USdata.Confirmed);
     var USrecovered = USdata.cases.map(USdata => USdata.Recovered);
     var USdeaths = USdata.cases.map(USdata => USdata.Deaths);
-    var USdates = USdata.cases.map(USdata => USdata.Date);
-    // init(USdates, UScases);
-
-    console.log(USdata);
-    console.log(USdates);
-
     var casesum = math.sum(UScases);
     var casemean = math.mean(UScases);
     var deathsum = math.sum(USdeaths);
-    var deathmean = math.mean(USdeaths);
     var recoveredsum = math.sum(USrecovered);
-    var recoveredmean = math.mean(USrecovered);
     var totalrecovered = casesum - deathsum
-
-    console.log(recoveredsum);
-    console.log(recoveredmean);
-    console.log(deathsum);
-    console.log(deathmean);
-    console.log(casesum);
-    console.log(casemean);
-
     casemean = Math.round(casemean * 100) / 100
     
+    // Create list (side note, figure out why it needs to be '[[ ]]' instead of '[ ]')
     summary = [[casesum, casemean, deathsum, recoveredsum, totalrecovered]]
     
+    // add data to html using d3
     d3.select("tbody").html("")
     d3.select("tbody")
     .selectAll("tr")
