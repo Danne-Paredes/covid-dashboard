@@ -23,7 +23,7 @@ def after_request(response):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("dataindex.html")
 
 
 @app.route("/calijuly")
