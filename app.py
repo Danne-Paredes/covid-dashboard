@@ -23,7 +23,7 @@ def after_request(response):
 # Routes that will navigate the user to a different page within the website
 @app.route("/")
 def index():
-    return render_template("dataindex.html")
+    return render_template("index.html")
 
 
 @app.route("/calijuly")

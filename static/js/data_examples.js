@@ -6,11 +6,9 @@ function program(route) {
     d3.json(route).then(function (data) {
         
         USdata = data.cases
-
-
-
         console.log(USdata);
-        // create dynamic table for data with column headings
+        
+        // Use datatables library to create dynamic table for data
         $('#datatable').DataTable( {
             data: USdata,
             columns: [
