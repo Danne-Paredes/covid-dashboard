@@ -1,15 +1,17 @@
 var route = "apidata";
 
 program(route)
+
 function program(route) {
-    // get the data
+
+    // call for the data using flask route
     d3.json(route).then(function (data) {
-        
+
         USdata = data.cases
         console.log(USdata);
-        
+
         // Use datatables library to create dynamic table for data
-        $('#datatable').DataTable( {
+        $('#datatable').DataTable({
             data: USdata,
             columns: [
                 { data: 'Province/State' },

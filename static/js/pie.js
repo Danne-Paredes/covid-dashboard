@@ -50,7 +50,7 @@ function updateRoute() {
 // Run function to generate plots
 program(route)
 function program(route) {
-    // get the data
+    // call for the data and store summary data into variables
     d3.json(route).then(function (data) {
         USdata = data
         var UScases = USdata.cases.map(USdata => USdata.Confirmed);
