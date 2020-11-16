@@ -10,7 +10,7 @@ function program(route) {
 
 
         console.log(USdata);
-
+        // create dynamic table for data with column headings
         $('#datatable').DataTable( {
             data: USdata,
             columns: [

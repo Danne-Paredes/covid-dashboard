@@ -20,7 +20,7 @@ def after_request(response):
 
 
 
-
+# Routes that will navigate the user to a different page within the website
 @app.route("/")
 def index():
     return render_template("dataindex.html")
@@ -50,10 +50,9 @@ def heatindex():
 
 
 
-# Route that will trigger the scrape function
+# Route that will trigger the scrape function for all US data
 @app.route("/api")
 def api():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     data1 = client["covid_db"].GUSdata.find({}, {'_id': False})
 
     cases = [case for case in data1]
@@ -65,9 +64,10 @@ def api():
     return jsonify(data)
 
 
+
+# Routes that trigger scrape function for US data grouped by month
 @app.route("/api/march")
 def marchapi():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     marchcoll = client["covid_db"].GUSdata.find(
         {"Date":  {"$regex": "3/\d*/2020"}}, {'_id': False})
 
@@ -82,7 +82,6 @@ def marchapi():
 
 @app.route("/api/april")
 def aprilapi():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     aprilcoll = client["covid_db"].GUSdata.find(
         {"Date":  {"$regex": "4/\d*/2020"}}, {'_id': False})
 
@@ -97,7 +96,6 @@ def aprilapi():
 
 @app.route("/api/may")
 def mayapi():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     maycoll = client["covid_db"].GUSdata.find(
         {"Date":  {"$regex": "5/\d*/2020"}}, {'_id': False})
 
@@ -112,7 +110,6 @@ def mayapi():
 
 @app.route("/api/june")
 def juneapi():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     junecoll = client["covid_db"].GUSdata.find(
         {"Date":  {"$regex": "6/\d*/2020"}}, {'_id': False})
 
@@ -127,7 +124,6 @@ def juneapi():
 
 @app.route("/api/july")
 def julyapi():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     julycoll = client["covid_db"].GUSdata.find(
         {"Date":  {"$regex": "7/\d*/2020"}}, {'_id': False})
 
@@ -144,10 +140,9 @@ def julyapi():
 
 
 
-# Route that will trigger the scrape function
+# Route that will trigger the scrape function for all raw US data
 @app.route("/apidata")
 def apidata():
-    # data1 = mongo["covid_db"].covid.find({}, {'_id': False})
     data2 = client["covid_db"].USdata.find({}, {'_id': False})
 
     cases2 = [case for case in data2]
@@ -163,7 +158,7 @@ def apidata():
 
 
 
-
+# Routes that will trigger the scrape function for all US heatmap data
 @app.route("/api/all-heat")
 def heatAPI():
     Heatcoll = client["covid_db"].allHeat.find({}, {'_id': False})

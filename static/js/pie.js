@@ -2,6 +2,7 @@
 var margin = { top: 30, right: 30, bottom: 30, left: 50 },
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
 // append the svg object to the body of the page
 var svg = d3.select("#plot")
     .append("svg")
@@ -10,11 +11,16 @@ var svg = d3.select("#plot")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
+
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Define base variables
 var route = "api";
 var myPieChart = null;
+
+// Updates route when new date is selected
 d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute() {
     var dateMenu = d3.select("#selDate");
@@ -40,17 +46,17 @@ function updateRoute() {
     program(route)
     console.log(route)
 };
+
+// Run function to generate plots
 program(route)
 function program(route) {
     // get the data
     d3.json(route).then(function (data) {
         USdata = data
-        // var USdata = data.filter(function (d) { return d.Country === "US" });
         var UScases = USdata.cases.map(USdata => USdata.Confirmed);
         var USrecovered = USdata.cases.map(USdata => USdata.Recovered);
         var USdeaths = USdata.cases.map(USdata => USdata.Deaths);
         var USdates = USdata.cases.map(USdata => USdata.Date);
-        // init(USdates, UScases);
 
         console.log(USdata);
         console.log(USdates);
@@ -85,7 +91,7 @@ function program(route) {
             });
 
 
-
+        // define variables containg style and data to use for pie chart
         var ctx = document.getElementById('myChart');
         piedata = {
             datasets: [{
@@ -100,10 +106,8 @@ function program(route) {
 
 
 
-
+        // function to create new chart with data each time its called
         function drawChart() {
-
-
 
 
             function removeData(chart) {

@@ -2,6 +2,7 @@
 var margin = { top: 30, right: 30, bottom: 30, left: 50 },
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
 // append the svg object to the body of the page
 var svg = d3.select("#plot")
     .append("svg")
@@ -10,11 +11,16 @@ var svg = d3.select("#plot")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
+
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Define base variables
 var route = "api";
 var myPieChart = null;
+
+// Updates route when new date is selected
 d3.selectAll("#selDate").on("change", updateRoute);
 function updateRoute() {
     var dateMenu = d3.select("#selDate");
@@ -40,12 +46,13 @@ function updateRoute() {
     program(route)
     console.log(route)
 };
+// Run function to generate plots
 program(route)
 function program(route) {
+
     // get the data
     d3.json(route).then(function (data) {
         USdata = data
-        // var USdata = data.filter(function (d) { return d.Country === "US" });
         var UScases = USdata.cases.map(USdata => USdata.Confirmed);
         var USrecovered = USdata.cases.map(USdata => USdata.Recovered);
         var USdeaths = USdata.cases.map(USdata => USdata.Deaths);
@@ -92,10 +99,8 @@ function program(route) {
                 y: yaxis,
                 fill: 'tozeroy',
                 fillcolor: '#f7d333',
-                // color: "#fc180c",
                 type: 'line',
                 mode: 'none',
-                // line: {color: "#fc180c"}
             }];
             var layout = {
                 yaxis: {range:[0,4000000]}
@@ -112,7 +117,6 @@ function program(route) {
         var marker = "";
 
         d3.select("#dataset1").on("click", updatedata1);
-        // if (dataset === 'dataset1') {
         function updatedata1() {
             x = USdates;
             y = UScases;
@@ -125,7 +129,6 @@ function program(route) {
         }
 
         d3.select("#dataset2").on("click", updatedata2);
-        // if (dataset === 'dataset2') {
         function updatedata2() {
             x = USdates;
             y = USdeaths;
@@ -138,7 +141,6 @@ function program(route) {
         }
 
         d3.select("#dataset3").on("click", updatedata3);
-        // if (dataset === 'dataset3') {
         function updatedata3() {
             x = USdates;
             y = USrecovered;
